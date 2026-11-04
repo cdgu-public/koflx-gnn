@@ -1,0 +1,19 @@
+# knockouts excluded from the GNN input (user ruling 2026-10-30 ~17:05, verbatim: "알았어. 다만, 결과적으로 애매하면 다 빼고 fold 재구성해."): the 14 trace knockouts whose re-solve under the patch condition (script 104: FeasibilityTol 1e-8, Presolve -1 then 0, OptimalityTol 1e-6) had no optimum and whose shipped row was kept (summary.tsv patch_status kept_shipped_resolve_*)
+# diagnosis: result/moma_20261030_tolpatch/_nonoptimal_diag/rows.tsv (script_python/104c): knockout polytope feasible at 1e-8 for all 14, no forced fluxes in any model, MOMA objective covers all reactions (unique optimum exists); the non-optimal statuses are Gurobi numerical failures (status 12 numeric / 5 unbounded / 3 infeasible), not infeasibility; NumericFocus 3 recovered an optimum for only part of them -> ambiguous -> all 14 dropped
+# applied by script_python/64d_gnn_build_dataset_tolpatch.py --exclude (dataset result/gnn_20261030_tolpatch/dataset_v2); the rows stay in samples.tsv with in_gnn False and excluded_reason; the MOMA rows in result/moma_20261030_tolpatch/<line>/summary.tsv are unchanged
+# date 2026-10-30; n 14
+line	gene	reason
+ACH-000202	ENSG00000132423	patch re-solve non-optimal (unbounded); numerical failure of the QP; no optimum under NumericFocus 3 in every tested setting or call ambiguous
+ACH-000253	ENSG00000008130	patch re-solve non-optimal (infeasible); numerical failure of the QP
+ACH-000286	ENSG00000008130	patch re-solve non-optimal (infeasible); numerical failure of the QP
+ACH-000286	ENSG00000132423	patch re-solve non-optimal (unbounded); numerical failure of the QP
+ACH-000286	ENSG00000145321	patch re-solve non-optimal (unbounded); numerical failure of the QP
+ACH-000286	ENSG00000107611	patch re-solve non-optimal (unbounded); numerical failure of the QP
+ACH-000286	ENSG00000081479	patch re-solve non-optimal (unbounded); numerical failure of the QP
+ACH-000286	ENSG00000111012	patch re-solve non-optimal (unbounded); numerical failure of the QP
+ACH-000722	ENSG00000167186	patch re-solve non-optimal (unbounded); numerical failure of the QP; shipped growth ratio 1.0 contradicts the FBA knockout optimum 0
+ACH-000971	ENSG00000256269	patch re-solve non-optimal (unbounded); numerical failure of the QP
+ACH-000997	ENSG00000185973	patch re-solve non-optimal (unbounded); numerical failure of the QP
+ACH-002535	ENSG00000108439	patch re-solve non-optimal (unbounded); numerical failure of the QP
+ACH-002654	ENSG00000135002	patch re-solve non-optimal (infeasible); numerical failure of the QP
+ACH-002659	ENSG00000144741	patch re-solve non-optimal (unbounded); numerical failure of the QP

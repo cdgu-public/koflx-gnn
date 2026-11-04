@@ -1,0 +1,98 @@
+{
+ "name": "protocol_v3_fixed_budget_cosine_tolpatch",
+ "written": "2026-10-30 13:40 KST, before the first launch on the solver-tolerance-patched dataset",
+ "authority": [
+  "result/gnn_20261028/protocol_lock_v3_20261030.json (training rule, arms, monitoring; unchanged here)",
+  "documentation/status.md entry 2026-10-30 13:18 KST (user decision: option A, re-solve trace knockouts at FeasibilityTol 1e-8, rebuild dataset, retrain)",
+  "result/gnn_20261028/discussion_20261030/review_tolerance.md (evidence)"
+ ],
+ "statement": "Same training rule as protocol_lock_v3_20261030.json (fixed 30 epochs, cosine annealing 1e-3 to 1e-5 per epoch, AdamW weight decay 1e-4, last-epoch checkpoint, per-epoch ckpt/ for monitoring only, no validation-based stopping or selection, refuse-if-exists, no medium input), applied to the dataset built by script_python/64d_gnn_build_dataset_tolpatch.py from result/moma_20261030_tolpatch (script_python/104_moma_tolpatch_line.py: trace knockouts, 0 < max|v_ref| over GPR-disabled reactions <= 1e-5, re-solved at Gurobi FeasibilityTol 1e-8 on the shipped pFBA reference; every other row and the reference as shipped). The dataset is a protocol parameter (key dataset, recorded in every config.json by the --dataset flag added 2026-10-30 to 81b, 90 and 93). Output roots and the folder tag _tolpatch differ from the 2026-10-28 runs so nothing collides with the stopped old-dataset runs (result/gnn_20261028/runs_v2/*fixedcos*/STOPPED_OLD_DATASET.txt, kept). Evaluation reads pred_test.tsv only (script_python/85_eval_gnn_v2.py --samples result/gnn_20261030_tolpatch/dataset_v2/samples.tsv).",
+ "dataset": "/data/workspace/cdgu/Winery/seeding/CRC_GEM/result/gnn_20261030_tolpatch/dataset_v2",
+ "dataset_md5_samples_tsv": "c7a4c4849bdfe4b696aaf517d7afacbb (result/gnn_20261030_tolpatch/dataset_v2/samples.tsv, built 2026-10-30 17:14 KST by 64d --exclude; 18,704 samples pass the fluxome-change filter, 14 excluded)",
+ "dataset_v2_note": "2026-10-30 ~17:05 user ruling (verbatim: '알았어. 다만, 결과적으로 애매하면 다 빼고 fold 재구성해.'): the 14 trace knockouts whose patched re-solve had no optimum (result/gnn_20261030_tolpatch/exclude_nonoptimal_20261030.tsv; diagnosis result/moma_20261030_tolpatch/_nonoptimal_diag/) are excluded from the GNN input; gene-disjoint folds are the default group_folds of 81b on dataset_v2 (user ruling 'Fold 새로 해야 겨네' = accept the new assignment, no pinning). The earlier folder result/gnn_20261030_tolpatch/dataset (md5 fe25596fc36b1f3b66a5dfddf3b1a1f6, 18,718 samples) is superseded and kept.",
+ "falsifier_dry_test": "Already run on the 2026-10-28 dataset (result/gnn_20261028/runs_v2/A_line_nomed_fixedcos45_s0/fold0). Not repeated on the patched dataset unless the user orders it; the 30-epoch budget stands (review_stopping.md section 2).",
+ "controls_statement": "Controls as in the 2026-10-30 08:48 amendment (E3 graph relabeling, reaction identity embedding 16, WT-only input, MLP recipes gnn81 and hgblike), on the patched dataset, gene-disjoint split, seeds 0-2, folds 0-4, out roots below, tag _tolpatch. The MLP controls take rel_nn_dist / dup_in_train from the patched grid arm A_gene_nomed_fixedcos30_s0_tolpatch (--ref-run), so they are queued behind the grid.",
+ "common": {
+  "protocol": "fixed_cosine",
+  "lr": 0.001,
+  "lr_min": 1e-05,
+  "lr_schedule": "cosine_annealing_per_epoch_no_restarts",
+  "checkpoint": "last_epoch",
+  "early_stopping": false,
+  "optimizer": "AdamW",
+  "weight_decay": 0.0001,
+  "batch": 32,
+  "hidden": 64,
+  "nfold": 5,
+  "no_medium": true,
+  "presence": false,
+  "max_train_batches": 0,
+  "tag": "_tolpatch",
+  "dataset": "/data/workspace/cdgu/Winery/seeding/CRC_GEM/result/gnn_20261030_tolpatch/dataset_v2",
+  "mask_file": "/data/workspace/cdgu/Winery/seeding/CRC_GEM/result/gnn_20261028/growth_mask_v2_20261029.json",
+  "out_root": "/data/workspace/cdgu/Winery/seeding/CRC_GEM/result/gnn_20261030_tolpatch/runs_v2"
+ },
+ "arms": {
+  "grid": {
+   "max_epochs": 30,
+   "graphs": {"A": {"readout": "attn_max"}, "B": {"readout": "mean_max"}},
+   "splits": ["gene", "line"],
+   "seeds": [0, 1, 2],
+   "folds": [0, 1, 2, 3, 4]
+  },
+  "control_e3_relabel": {
+   "script": "90_gnn_e2e3_v2.py",
+   "max_epochs": 30,
+   "graphs": {"A": {"readout": "attn_max"}},
+   "splits": ["gene"],
+   "seeds": [0, 1, 2],
+   "folds": [0, 1, 2, 3, 4],
+   "flags": {"shuffle_graph": "relabel", "rxn_embed": 0, "wt_only": false, "no_early_stop": false, "permute_labels": false, "train_subset": 0, "stop_metric": "bce", "train_probe": 2000, "device": "cuda:0"}
+  },
+  "control_rxn_embed16": {
+   "script": "90_gnn_e2e3_v2.py",
+   "max_epochs": 30,
+   "graphs": {"A": {"readout": "attn_max"}},
+   "splits": ["gene"],
+   "seeds": [0, 1, 2],
+   "folds": [0, 1, 2, 3, 4],
+   "flags": {"shuffle_graph": "", "rxn_embed": 16, "wt_only": false, "no_early_stop": false, "permute_labels": false, "train_subset": 0, "stop_metric": "bce", "train_probe": 2000, "device": "cuda:0"}
+  },
+  "control_wt_only": {
+   "script": "90_gnn_e2e3_v2.py",
+   "max_epochs": 30,
+   "graphs": {"A": {"readout": "attn_max"}},
+   "splits": ["gene"],
+   "seeds": [0, 1, 2],
+   "folds": [0, 1, 2, 3, 4],
+   "flags": {"shuffle_graph": "", "rxn_embed": 0, "wt_only": true, "no_early_stop": false, "permute_labels": false, "train_subset": 0, "stop_metric": "bce", "train_probe": 2000, "device": "cuda:0"}
+  },
+  "control_mlp_gnn81": {
+   "script": "93_mlp_flat_v2.py",
+   "max_epochs": 30,
+   "splits": ["gene"],
+   "seeds": [0, 1, 2],
+   "folds": [0, 1, 2, 3, 4],
+   "common_override": {"out_root": "/data/workspace/cdgu/Winery/seeding/CRC_GEM/result/gnn_20261030_tolpatch/runs_v2_mlp", "hidden": [512, 128]},
+   "common_skip": ["presence", "max_train_batches"],
+   "flags": {"recipe": "gnn81", "smoke": false, "train_probe": 2000, "device": "cuda:0", "ref_root": "/data/workspace/cdgu/Winery/seeding/CRC_GEM/result/gnn_20261030_tolpatch/runs_v2", "ref_run": "A_gene_nomed_fixedcos30_s0_tolpatch"}
+  },
+  "control_mlp_hgblike": {
+   "script": "93_mlp_flat_v2.py",
+   "max_epochs": 30,
+   "splits": ["gene"],
+   "seeds": [0, 1, 2],
+   "folds": [0, 1, 2, 3, 4],
+   "common_override": {"out_root": "/data/workspace/cdgu/Winery/seeding/CRC_GEM/result/gnn_20261030_tolpatch/runs_v2_mlp", "hidden": [512, 128]},
+   "common_skip": ["presence", "max_train_batches"],
+   "flags": {"recipe": "hgblike", "smoke": false, "train_probe": 2000, "device": "cuda:0", "ref_root": "/data/workspace/cdgu/Winery/seeding/CRC_GEM/result/gnn_20261030_tolpatch/runs_v2", "ref_run": "A_gene_nomed_fixedcos30_s0_tolpatch"}
+  }
+ },
+ "not_protocol_parameters": ["workers", "protocol_lock", "patience", "min_epochs", "n_train", "n_val", "n_test", "f_in", "e_in", "lines", "ckpt_dir", "protocol_date"],
+ "monitoring": {
+  "writer": "script_python/100_monitor_v3.py",
+  "files": ["monitor_val.tsv", "monitor_test.tsv"],
+  "allowed_readers_of_monitor_or_ckpt": ["script_python/81b_gnn_train_v2.py", "script_python/100_monitor_v3.py", "script_python/101_check_protocol_v3.py", "script_bash/99_run_protocol_v3.sh", "script_python/90_gnn_e2e3_v2.py", "script_python/93_mlp_flat_v2.py", "script_bash/102_run_protocol_v3_controls.sh", "script_bash/107_run_protocol_v3_tolpatch.sh", "script_bash/108_run_protocol_v3_controls_tolpatch.sh"],
+  "evaluation_reads_only": "pred_test.tsv"
+ }
+}

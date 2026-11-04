@@ -1,0 +1,101 @@
+{
+ "name": "protocol_v3_fixed_budget_cosine",
+ "written": "2026-10-30 07:55 KST, before the first launch",
+ "authority": [
+  "result/gnn_20261028/discussion_20261030/review_stopping.md section 2 (rule) and section 3 (monitoring)",
+  "documentation/status.md entry 2026-10-30 07:44 KST (user decision)"
+ ],
+ "statement": "Training rule for the A' and B no-medium reruns (script_python/81b_gnn_train_v2.py --protocol fixed_cosine): a fixed budget of 30 epochs per fold, no early stopping, no validation-based checkpoint selection, no stop metric, no patience. AdamW (weight decay 1e-4) with the learning rate annealed once per epoch by cosine annealing without restarts from 1e-3 to 1e-5 (Loshchilov & Hutter 2017, arXiv:1608.03983). The checkpoint is the last epoch (model.pt). Validation metrics are computed and logged every epoch and drive nothing. The split code, sampler, graphs, growth mask, model, batch size and hidden size are those of script 81b. Test predictions are written once from the last-epoch model (pred_test.tsv), the only file read by script_python/85_eval_gnn_v2.py. Per-epoch checkpoints (ckpt/ep<k>.pt) feed script_python/100_monitor_v3.py, which writes monitor_val.tsv and monitor_test.tsv for a trajectory figure labeled monitoring; no number from them picks an epoch, a seed, or a model (checker script_python/101_check_protocol_v3.py). Any later change of budget or schedule is an exploratory arm with a new folder token, never a replacement.",
+ "amended": "2026-10-30 08:48 KST, control arms added before the first control launch (documentation/status.md entry 2026-10-30 08:40 KST: controls rerun under protocol v3); the grid and dry_test arms and the common block are unchanged",
+ "controls_statement": "Controls under the same rule (script_python/90_gnn_e2e3_v2.py and 93_mlp_flat_v2.py, --protocol fixed_cosine, fixed 30 epochs, cosine annealing 1e-3 to 1e-5 per epoch, AdamW weight decay 1e-4, last-epoch model.pt, per-epoch ckpt/, no validation-based stopping or selection, refuse-if-exists), all without medium input, gene-disjoint split, seeds 0-2, folds 0-4, compared with the grid arm A' no-medium gene-disjoint: E3 graph relabeling (--shuffle-graph relabel, token _shufrelabel), reaction identity embedding (--rxn-embed 16, token _rid16), WT-only (--wt-only, token _wtonly), MLP on the flat fluxome (93, recipes gnn81 and hgblike, tokens mlp81 / mlphgb, --no-medium so the MLP sees the 7,147 unmasked reaction columns only, like the no-medium GNN; out_root runs_v2_mlp). The MLP recipes keep their target and sampler (gnn81: soft target, balanced sampler; hgblike: hard label, plain shuffling) and lose their stopping rule. Per-epoch train-probe AUROC (90, 93) is logged and drives nothing. Monitoring: script_python/100_monitor_v3.py (dispatch on config.json key script). Runner: script_bash/102_run_protocol_v3_controls.sh, queued behind the grid.",
+ "falsifier_dry_test": "A' cell-line-disjoint fold 0, seed 0, no medium, 45 epochs under the same schedule (annealed over 45). If validation AUROC keeps rising past epoch 30 by more than one standard error (about 0.01, Hanley-McNeil), the 30-epoch budget is wrong and must be re-registered before the grid.",
+ "common": {
+  "protocol": "fixed_cosine",
+  "lr": 0.001,
+  "lr_min": 1e-05,
+  "lr_schedule": "cosine_annealing_per_epoch_no_restarts",
+  "checkpoint": "last_epoch",
+  "early_stopping": false,
+  "optimizer": "AdamW",
+  "weight_decay": 0.0001,
+  "batch": 32,
+  "hidden": 64,
+  "nfold": 5,
+  "no_medium": true,
+  "presence": false,
+  "max_train_batches": 0,
+  "tag": "",
+  "mask_file": "/data/workspace/cdgu/Winery/seeding/CRC_GEM/result/gnn_20261028/growth_mask_v2_20261029.json",
+  "out_root": "/data/workspace/cdgu/Winery/seeding/CRC_GEM/result/gnn_20261028/runs_v2"
+ },
+ "arms": {
+  "grid": {
+   "max_epochs": 30,
+   "graphs": {"A": {"readout": "attn_max"}, "B": {"readout": "mean_max"}},
+   "splits": ["gene", "line"],
+   "seeds": [0, 1, 2],
+   "folds": [0, 1, 2, 3, 4]
+  },
+  "dry_test": {
+   "max_epochs": 45,
+   "graphs": {"A": {"readout": "attn_max"}},
+   "splits": ["line"],
+   "seeds": [0],
+   "folds": [0]
+  },
+  "control_e3_relabel": {
+   "script": "90_gnn_e2e3_v2.py",
+   "max_epochs": 30,
+   "graphs": {"A": {"readout": "attn_max"}},
+   "splits": ["gene"],
+   "seeds": [0, 1, 2],
+   "folds": [0, 1, 2, 3, 4],
+   "flags": {"shuffle_graph": "relabel", "rxn_embed": 0, "wt_only": false, "no_early_stop": false, "permute_labels": false, "train_subset": 0, "stop_metric": "bce", "train_probe": 2000, "device": "cuda:0"}
+  },
+  "control_rxn_embed16": {
+   "script": "90_gnn_e2e3_v2.py",
+   "max_epochs": 30,
+   "graphs": {"A": {"readout": "attn_max"}},
+   "splits": ["gene"],
+   "seeds": [0, 1, 2],
+   "folds": [0, 1, 2, 3, 4],
+   "flags": {"shuffle_graph": "", "rxn_embed": 16, "wt_only": false, "no_early_stop": false, "permute_labels": false, "train_subset": 0, "stop_metric": "bce", "train_probe": 2000, "device": "cuda:0"}
+  },
+  "control_wt_only": {
+   "script": "90_gnn_e2e3_v2.py",
+   "max_epochs": 30,
+   "graphs": {"A": {"readout": "attn_max"}},
+   "splits": ["gene"],
+   "seeds": [0, 1, 2],
+   "folds": [0, 1, 2, 3, 4],
+   "flags": {"shuffle_graph": "", "rxn_embed": 0, "wt_only": true, "no_early_stop": false, "permute_labels": false, "train_subset": 0, "stop_metric": "bce", "train_probe": 2000, "device": "cuda:0"}
+  },
+  "control_mlp_gnn81": {
+   "script": "93_mlp_flat_v2.py",
+   "max_epochs": 30,
+   "splits": ["gene"],
+   "seeds": [0, 1, 2],
+   "folds": [0, 1, 2, 3, 4],
+   "common_override": {"out_root": "/data/workspace/cdgu/Winery/seeding/CRC_GEM/result/gnn_20261028/runs_v2_mlp", "hidden": [512, 128]},
+   "common_skip": ["presence", "max_train_batches"],
+   "flags": {"recipe": "gnn81", "smoke": false, "train_probe": 2000, "device": "cuda:0", "ref_root": "/data/workspace/cdgu/Winery/seeding/CRC_GEM/result/gnn_20261028/runs_v2"}
+  },
+  "control_mlp_hgblike": {
+   "script": "93_mlp_flat_v2.py",
+   "max_epochs": 30,
+   "splits": ["gene"],
+   "seeds": [0, 1, 2],
+   "folds": [0, 1, 2, 3, 4],
+   "common_override": {"out_root": "/data/workspace/cdgu/Winery/seeding/CRC_GEM/result/gnn_20261028/runs_v2_mlp", "hidden": [512, 128]},
+   "common_skip": ["presence", "max_train_batches"],
+   "flags": {"recipe": "hgblike", "smoke": false, "train_probe": 2000, "device": "cuda:0", "ref_root": "/data/workspace/cdgu/Winery/seeding/CRC_GEM/result/gnn_20261028/runs_v2"}
+  }
+ },
+ "not_protocol_parameters": ["workers", "protocol_lock", "patience", "min_epochs", "n_train", "n_val", "n_test", "f_in", "e_in", "lines", "ckpt_dir", "protocol_date"],
+ "monitoring": {
+  "writer": "script_python/100_monitor_v3.py",
+  "files": ["monitor_val.tsv", "monitor_test.tsv"],
+  "allowed_readers_of_monitor_or_ckpt": ["script_python/81b_gnn_train_v2.py", "script_python/100_monitor_v3.py", "script_python/101_check_protocol_v3.py", "script_bash/99_run_protocol_v3.sh", "script_python/90_gnn_e2e3_v2.py", "script_python/93_mlp_flat_v2.py", "script_bash/102_run_protocol_v3_controls.sh"],
+  "evaluation_reads_only": "pred_test.tsv"
+ }
+}

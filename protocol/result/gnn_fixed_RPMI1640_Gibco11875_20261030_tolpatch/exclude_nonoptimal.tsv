@@ -1,0 +1,17 @@
+# knockouts excluded from the GNN input of the common-medium dataset (RPMI1640_Gibco11875): trace rows whose patched re-solve (script 104, FeasibilityTol 1e-8, Presolve -1 then 0) was non-optimal and whose shipped row was kept (summary.tsv patch_status kept_shipped_resolve_*); rule = dataset_v2 rule (user ruling 2026-10-30 17:05: ambiguous -> drop); date 2026-10-30 19:46
+line	gene	reason
+ACH-000202	ENSG00000132423	patch re-solve non-optimal (kept_shipped_resolve_unbounded); numerical failure of the QP under the patch condition; excluded by the dataset_v2 rule
+ACH-000253	ENSG00000008130	patch re-solve non-optimal (kept_shipped_resolve_infeasible); numerical failure of the QP under the patch condition; excluded by the dataset_v2 rule
+ACH-000286	ENSG00000008130	patch re-solve non-optimal (kept_shipped_resolve_infeasible); numerical failure of the QP under the patch condition; excluded by the dataset_v2 rule
+ACH-000286	ENSG00000132423	patch re-solve non-optimal (kept_shipped_resolve_unbounded); numerical failure of the QP under the patch condition; excluded by the dataset_v2 rule
+ACH-000286	ENSG00000145321	patch re-solve non-optimal (kept_shipped_resolve_unbounded); numerical failure of the QP under the patch condition; excluded by the dataset_v2 rule
+ACH-000286	ENSG00000107611	patch re-solve non-optimal (kept_shipped_resolve_unbounded); numerical failure of the QP under the patch condition; excluded by the dataset_v2 rule
+ACH-000286	ENSG00000081479	patch re-solve non-optimal (kept_shipped_resolve_unbounded); numerical failure of the QP under the patch condition; excluded by the dataset_v2 rule
+ACH-000286	ENSG00000111012	patch re-solve non-optimal (kept_shipped_resolve_unbounded); numerical failure of the QP under the patch condition; excluded by the dataset_v2 rule
+ACH-000722	ENSG00000167186	patch re-solve non-optimal (kept_shipped_resolve_unbounded); numerical failure of the QP under the patch condition; excluded by the dataset_v2 rule
+ACH-000950	ENSG00000173085	patch re-solve non-optimal (kept_shipped_resolve_unbounded); numerical failure of the QP under the patch condition; excluded by the dataset_v2 rule
+ACH-000971	ENSG00000256269	patch re-solve non-optimal (kept_shipped_resolve_unbounded); numerical failure of the QP under the patch condition; excluded by the dataset_v2 rule
+ACH-000997	ENSG00000185973	patch re-solve non-optimal (kept_shipped_resolve_unbounded); numerical failure of the QP under the patch condition; excluded by the dataset_v2 rule
+ACH-002535	ENSG00000108439	patch re-solve non-optimal (kept_shipped_resolve_unbounded); numerical failure of the QP under the patch condition; excluded by the dataset_v2 rule
+ACH-002654	ENSG00000135002	patch re-solve non-optimal (kept_shipped_resolve_infeasible); numerical failure of the QP under the patch condition; excluded by the dataset_v2 rule
+ACH-002659	ENSG00000144741	patch re-solve non-optimal (kept_shipped_resolve_unbounded); numerical failure of the QP under the patch condition; excluded by the dataset_v2 rule

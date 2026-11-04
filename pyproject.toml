@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "crcgem"
+version = "0.1.0.dev0"
+description = "Context-specific GEM reconstruction and perturbation for colorectal cancer"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "cobra>=0.29",
+    "numpy",
+    "scipy",
+    "pandas",
+    "pyyaml",
+]
+
+[project.optional-dependencies]
+extraction = ["troppo"]
+dev = ["pytest", "pyarrow", "tqdm"]
+
+[tool.setuptools.packages.find]
+where = ["module"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["module"]

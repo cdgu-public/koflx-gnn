@@ -1,0 +1,95 @@
+{
+ "name": "protocol_v3_fixed_budget_cosine_common_RPMI1640_Gibco11875",
+ "written": "2026-11-01 13:27 KST, before the first launch on the common-medium dataset RPMI1640_Gibco11875",
+ "authority": [
+  "/data/workspace/cdgu/Winery/seeding/CRC_GEM/result/gnn_20261030_tolpatch/protocol_lock_v3_tolpatch_20261030.json (training rule unchanged)",
+  "documentation/status.md entry 2026-10-31 17:57 KST (user: GNN on both common-medium datasets, RUN)",
+  "result/common_medium_20261030/gnn_design_20261031.md (design)"
+ ],
+ "statement": "Same training rule as protocol_lock_v3_tolpatch_20261030.json, applied to /data/workspace/cdgu/Winery/seeding/CRC_GEM/result/gnn_fixed_RPMI1640_Gibco11875_20261030_tolpatch/dataset (MOMA under a common medium, RPMI1640_Gibco11875; script 64d). Gene-disjoint folds are the default group_folds of 81b on this dataset (not pinned to the own-medium folds; design section 1); cell-line-disjoint folds are identical to the own-medium grid. Grid arm only.",
+ "dataset": "/data/workspace/cdgu/Winery/seeding/CRC_GEM/result/gnn_fixed_RPMI1640_Gibco11875_20261030_tolpatch/dataset",
+ "dataset_md5_samples_tsv": "f2b30d1b1c0d93f11417d957b6f438dc (/data/workspace/cdgu/Winery/seeding/CRC_GEM/result/gnn_fixed_RPMI1640_Gibco11875_20261030_tolpatch/dataset/samples.tsv)",
+ "common": {
+  "protocol": "fixed_cosine",
+  "lr": 0.001,
+  "lr_min": 1e-05,
+  "lr_schedule": "cosine_annealing_per_epoch_no_restarts",
+  "checkpoint": "last_epoch",
+  "early_stopping": false,
+  "optimizer": "AdamW",
+  "weight_decay": 0.0001,
+  "batch": 32,
+  "hidden": 64,
+  "nfold": 5,
+  "no_medium": true,
+  "presence": false,
+  "max_train_batches": 0,
+  "tag": "_cmRPMI1640_Gibco11875",
+  "dataset": "/data/workspace/cdgu/Winery/seeding/CRC_GEM/result/gnn_fixed_RPMI1640_Gibco11875_20261030_tolpatch/dataset",
+  "mask_file": "/data/workspace/cdgu/Winery/seeding/CRC_GEM/result/gnn_20261028/growth_mask_v2_20261029.json",
+  "out_root": "/data/workspace/cdgu/Winery/seeding/CRC_GEM/result/gnn_fixed_RPMI1640_Gibco11875_20261030_tolpatch/runs_v2"
+ },
+ "arms": {
+  "grid": {
+   "max_epochs": 30,
+   "graphs": {
+    "A": {
+     "readout": "attn_max"
+    },
+    "B": {
+     "readout": "mean_max"
+    }
+   },
+   "splits": [
+    "gene",
+    "line"
+   ],
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "folds": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ]
+  }
+ },
+ "not_protocol_parameters": [
+  "workers",
+  "protocol_lock",
+  "patience",
+  "min_epochs",
+  "n_train",
+  "n_val",
+  "n_test",
+  "f_in",
+  "e_in",
+  "lines",
+  "ckpt_dir",
+  "protocol_date"
+ ],
+ "monitoring": {
+  "writer": "script_python/100_monitor_v3.py",
+  "files": [
+   "monitor_val.tsv",
+   "monitor_test.tsv"
+  ],
+  "allowed_readers_of_monitor_or_ckpt": [
+   "script_python/81b_gnn_train_v2.py",
+   "script_python/100_monitor_v3.py",
+   "script_python/101_check_protocol_v3.py",
+   "script_bash/99_run_protocol_v3.sh",
+   "script_python/90_gnn_e2e3_v2.py",
+   "script_python/93_mlp_flat_v2.py",
+   "script_bash/102_run_protocol_v3_controls.sh",
+   "script_bash/107_run_protocol_v3_tolpatch.sh",
+   "script_bash/108_run_protocol_v3_controls_tolpatch.sh",
+   "script_bash/116_run_protocol_v3_common_medium.sh"
+  ],
+  "evaluation_reads_only": "pred_test.tsv"
+ }
+}

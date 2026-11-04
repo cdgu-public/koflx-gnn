@@ -1,0 +1,34 @@
+{
+ "biomass": "MAR13082",
+ "mask_reactions": [
+  "MAR04603",
+  "MAR08615",
+  "MAR08616",
+  "MAR08617",
+  "MAR09167",
+  "MAR09608",
+  "MAR10023",
+  "MAR10024",
+  "MAR10062",
+  "MAR10063",
+  "MAR10064",
+  "MAR10065",
+  "MAR13082"
+ ],
+ "mask_index": [
+  4483,
+  8342,
+  8343,
+  8344,
+  8882,
+  9320,
+  9731,
+  9732,
+  9769,
+  9770,
+  9771,
+  9772,
+  12747
+ ],
+ "rule": "biomass + reactions with KO/WT flux ratio == growth ratio in >=99% of samples where WT-active + reactions sharing a metabolite only with biomass"
+}
