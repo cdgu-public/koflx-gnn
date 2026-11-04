@@ -140,4 +140,4 @@ MIT License, see `LICENSE`.
 
 ## Citation
 
-[TODO - citation of the paper after acceptance]
+Evaluating graph neural networks on simulated knockout fluxomes for cancer gene essentiality prediction. Manuscript submitted to RECOMB 2027.
