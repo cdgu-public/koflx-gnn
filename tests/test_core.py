@@ -10,13 +10,13 @@ import pytest
 
 from crcgem import config, distribution, expression, interaction, reference_flux, sampling
 
-ECOLI = "/data/workspace/cdgu/Winery/seeding/quantum/quantum_gem/data/e_coli_core.xml"
+ECOLI = "textbook"  # E. coli core model bundled with COBRApy (cobra.io.load_model)
 
 
 @pytest.fixture(scope="module")
 def model():
     cobra = pytest.importorskip("cobra")
-    m = cobra.io.read_sbml_model(ECOLI)
+    m = cobra.io.load_model(ECOLI)
     m.solver = "glpk"
     return m
 
@@ -43,7 +43,9 @@ def test_sampling_n_restricted_to_predeclared_values():
 
 
 def test_gpr_aware_deletion_cannot_be_silently_disabled():
-    c = config.MomaConfig(formulation="linear", reference_mode="pfba",
+    c = config.MomaConfig(formulation="linear", proliferative_statuses=["CRC"],
+                          proliferative_reference="pfba",
+                          nonproliferative_readout="not_applicable",
                           gpr_aware_deletion=False)
     with pytest.raises(config.ConfigError, match="P1"):
         c.validate()

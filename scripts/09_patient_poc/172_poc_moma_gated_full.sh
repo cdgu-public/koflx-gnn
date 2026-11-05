@@ -5,7 +5,7 @@
 # Output $O/{tumor,normal}/<model>/, one log per job in $O/logs/. Afterwards script_bash/173_poc_gated_post.sh (checker, layout, 141, 148, 159, 174).
 # Usage: nohup bash script_bash/172_poc_moma_gated_full.sh > result/patient_poc_20261103/moma_gated_20261104/full_chain.log 2>&1 &
 R=/data/workspace/cdgu/Winery/seeding/CRC_GEM; cd $R
-export P=result/patient_poc_20261103 O=result/patient_poc_20261103/moma_gated_20261104 PY=/home/cdgu/anaconda3/envs/crcgem/bin/python
+export P=result/patient_poc_20261103 O=result/patient_poc_20261103/moma_gated_20261104 PY=$HOME/anaconda3/envs/crcgem/bin/python
 export PYTHONNOUSERSITE=1 CUDA_VISIBLE_DEVICES= A=RPMI1640_Gibco11875 G=result/patient_poc_20261103/genes/poc_genes_cut10.txt
 mkdir -p $O/logs
 [ "$(grep -vc '^#' $G)" = 18 ] || { echo "gene list not 18"; exit 1; }

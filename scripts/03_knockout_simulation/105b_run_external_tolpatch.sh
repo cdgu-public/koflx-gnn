@@ -10,7 +10,7 @@
 # Usage: bash script_bash/105b_run_external_tolpatch.sh [N parallel]
 R=/data/workspace/cdgu/Winery/seeding/CRC_GEM; cd $R
 export PYTHONNOUSERSITE=1 R
-P=/home/cdgu/anaconda3/envs/crcgem/bin/python; export P
+P=$HOME/anaconda3/envs/crcgem/bin/python; export P
 N=${1:-6}; T=${THREADS:-2}; export T
 OUT=${OUT:-result/external_gi_normal_20261103_tolpatch/moma}; export OUT
 SETS=${SETS:-"result/external_gi_normal_20261103 result/external_normal_bph1_20261103"}

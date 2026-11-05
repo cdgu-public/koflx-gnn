@@ -1,5 +1,5 @@
 #!/bin/bash
-# Baseline-plus-flag control arm on the solver-tolerance-patched dataset (user ruling 2026-11-01 "바로 시작"; design
+# Baseline-plus-flag control arm on the solver-tolerance-patched dataset (user ruling 2026-11-01 "start now" (translated); design
 # result/gnn_20261030_tolpatch/design_flag_arm_20261101.md). New file; 107 / 108 and their runs are untouched.
 # Same rule as the 108 controls: 90_gnn_e2e3_v2.py --protocol fixed_cosine, fixed 30 epochs, cosine 1e-3 -> 1e-5, last-epoch checkpoint,
 # --no-medium, graph A', gene-disjoint split, seeds 0-2, folds 0-4 = 15 runs, dataset result/gnn_20261030_tolpatch/dataset_v2, tag _tolpatch.

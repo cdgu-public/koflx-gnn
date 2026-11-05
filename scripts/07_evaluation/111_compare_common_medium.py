@@ -1,7 +1,7 @@
 """MOMA under a common medium (sensitivity analysis; documentation/terminology.md row "MOMA under a common medium") compared with MOMA in
 each cell line's own medium, both after the solver-tolerance patch (script 104) and the non-optimal exclusion rule (dataset_v2 rule).
 
-Pre-specified readout (result/gnn_20261028/discussion_20261029/review_gem.md section 9.2.4 and 9.2.6, user approval status.md 2026-10-29
+Pre-specified readout (result/gnn_20261028/discussion_20261029/review_gem.md section 9.2.4 and 9.2.6, user approval decision log 2026-10-29
 13:40 / 15:00 "both media in the paper, no selection by test performance"): report the common-medium run (a) on the INTERSECTION of its GNN
 sample set with the own-medium sample set (paired comparison) and (b) on its OWN sample set, never mixed; the readouts are the change of
 the MOMA-lethal list (Jaccard), the MOMA AUROC against the DepMap label, and the stratum sizes; the common-medium run is a control of the

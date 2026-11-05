@@ -1,5 +1,5 @@
 #!/bin/bash
-# Graph B stopping-rule sensitivity, seeds 1 and 2 (user 2026-11-04 12:3x: "GPU 써도 되고 2,3 두개 써"). Copy of 157; only the seed loop and GPU differ.
+# Graph B stopping-rule sensitivity, seeds 1 and 2 (user 2026-11-04 12:3x: "GPUs may be used, use GPUs 2 and 3" (translated)). Copy of 157; only the seed loop and GPU differ.
 # Same superseded early-stopping rule as 133 (81b --protocol es_valbce: min 10, patience 8, max 50, best-validation checkpoint, constant lr).
 # Only factor vs runs_v2/B_gene_nomed_meanmax_fixedcos30_s0_tolpatch: the protocol fields. B readout mean_max, --no-medium, gene split.
 # One run at a time on GPU 3 (B peak 15.2 GB; GPU 2 runs 155b). Never GPUs 0, 1. Out runs_v2_es_B.

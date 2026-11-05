@@ -13,7 +13,7 @@
 #          > result/patient_poc_20261103_chain.log 2>&1 &
 R=/data/workspace/cdgu/Winery/seeding/CRC_GEM; cd $R
 : ${P:?} ${EXPR:?} ${LINEMAP:?}; GPU=${GPU:-0}; [ "$GPU" = 3 ] && { echo "GPU 3 is not allowed"; exit 1; }
-PY=/home/cdgu/anaconda3/envs/crcgem/bin/python; PYG=/home/cdgu/anaconda3/envs/crcgem_gnn/bin/python
+PY=$HOME/anaconda3/envs/crcgem/bin/python; PYG=$HOME/anaconda3/envs/crcgem_gnn/bin/python
 export PYTHONNOUSERSITE=1; A=RPMI1640_Gibco11875; mkdir -p $P
 say() { echo "[$(date '+%F %T')] $*"; }
 die() { say "FAILED: $*"; echo "$(date '+%F %T') $*" >> $P/chain_failed.txt; exit 1; }

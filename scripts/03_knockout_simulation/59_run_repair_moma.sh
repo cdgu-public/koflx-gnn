@@ -3,7 +3,7 @@
 # Idempotent: skips steps whose outputs exist. Usage: <N parallel>
 R=/data/workspace/cdgu/Winery/seeding/CRC_GEM
 export PYTHONNOUSERSITE=1 R
-P=/home/cdgu/anaconda3/envs/crcgem/bin/python
+P=$HOME/anaconda3/envs/crcgem/bin/python
 export P
 xargs -P "${1:-20}" -I{} bash -c '
 d=$R/result/tinit_localT2_20261027/models/{}; o=$R/result/moma_20261027/{}; mkdir -p $o

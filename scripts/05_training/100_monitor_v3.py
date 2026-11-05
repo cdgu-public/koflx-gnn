@@ -5,7 +5,7 @@ the test fold with each one in a single pass over the data (every batch is built
 Writes <fold>/monitor_val.tsv and <fold>/monitor_test.tsv: # header lines (source run, protocol parameters, n, date, purpose),
 columns epoch, auroc, auprc, bce, n. Nothing else is written into the fold folder.
 MONITORING ONLY. These files are never read by 85_eval_gnn_v2.py or by any selection step (checker 101_check_protocol_v3.py).
-Control runs (2026-10-30, status.md 08:40 KST ruling): config.json key "script" selects the training script to re-execute,
+Control runs (2026-10-30, decision log 08:40 KST ruling): config.json key "script" selects the training script to re-execute,
 90_gnn_e2e3_v2.py (E3 relabel / identity embedding / WT-only; control flags passed from config.json) or 93_mlp_flat_v2.py (MLP on
 the flat fluxome; checkpoints scored on the in-memory feature matrix). 81b configs carry no script key (unchanged path).
 Usage: CUDA_VISIBLE_DEVICES=<g> python 100_monitor_v3.py --run <run folder or fold folder> [more ...] [--workers 4] [--cpu]

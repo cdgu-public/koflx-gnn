@@ -18,7 +18,7 @@
 set -u
 R=/data/workspace/cdgu/Winery/seeding/CRC_GEM; N=${1:-5}; shift || true
 [ $# -ge 1 ] || { echo "give at least one line"; exit 1; }
-PY58=$R/script_python/58b_moma_line_fixed.py; PYC=/home/cdgu/anaconda3/envs/crcgem/bin/python
+PY58=$R/script_python/58b_moma_line_fixed.py; PYC=$HOME/anaconda3/envs/crcgem/bin/python
 LBT=$R/data/medium/uptake_caps/exchange_lower_bounds_by_assembly.tsv
 SUB=${FIXED:-own}; O=$R/result/moma_serum_variant_20261029/$SUB; [ -n "${SMOKE_KO:-}" ] && O=${O}_smoke
 mkdir -p $O; export PYTHONNOUSERSITE=1 R O PY58 PYC LBT

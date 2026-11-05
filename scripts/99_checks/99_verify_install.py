@@ -10,18 +10,19 @@ real job is submitted.
 from __future__ import annotations
 
 import sys
+import tempfile
 import traceback
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "module"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "module"))  # repo root/module; resolve() follows the script_python/ link
 
 from crcgem import (config, distribution, expression, interaction,  # noqa: E402
                     reference_flux, sampling, solver as solver_mod)
 
-ECOLI = "/data/workspace/cdgu/Winery/seeding/quantum/quantum_gem/data/e_coli_core.xml"
+ECOLI = "textbook"  # E. coli core model bundled with COBRApy (cobra.io.load_model)
 _results: list[tuple[str, bool, str]] = []
 
 
@@ -231,8 +232,7 @@ def _():
         "geneEntrezID": ["10", "20", "30"],
         "geneSymbols": ["AAA", "BBB", "CCC"],
     })
-    tmp = Path("/tmp/claude-1011/_gt.tsv")
-    tmp.parent.mkdir(parents=True, exist_ok=True)
+    tmp = Path(tempfile.mkdtemp()) / "_gt.tsv"
     table.to_csv(tmp, sep="\t", index=False)
     mat = pd.DataFrame(np.arange(8).reshape(4, 2),
                        index=["AAA", "BBB", "CCC", "GHOST"], columns=["s1", "s2"])
@@ -290,15 +290,13 @@ def _():
 def _ecoli():
     import cobra
 
-    m = cobra.io.read_sbml_model(ECOLI)
+    m = cobra.io.load_model(ECOLI)
     m.solver = "glpk"
     return m
 
 
 @check("reference_flux: pFBA reference + face degeneracy on E. coli core")
 def _():
-    if not Path(ECOLI).exists():
-        raise FileNotFoundError(f"{ECOLI} absent — skipping model-based checks")
     ref = reference_flux.compute(_ecoli(), "pfba", diagnose=True)
     assert ref.growth > 0
     assert ref.n_degenerate <= 5, f"expected near-unique at core scale, got {ref.n_degenerate}"
@@ -306,8 +304,6 @@ def _():
 
 @check("reference_flux: Chebyshev centre is deterministic")
 def _():
-    if not Path(ECOLI).exists():
-        raise FileNotFoundError("E. coli core absent")
     a = reference_flux.compute(_ecoli(), "chebyshev_face", diagnose=False)
     b = reference_flux.compute(_ecoli(), "chebyshev_face", diagnose=False)
     np.testing.assert_allclose(a.fluxes.to_numpy(), b.fluxes.to_numpy(), atol=1e-6)
@@ -315,8 +311,6 @@ def _():
 
 @check("moma: GPR-aware single-gene screen runs and finds essentials")
 def _():
-    if not Path(ECOLI).exists():
-        raise FileNotFoundError("E. coli core absent")
     from crcgem import moma
 
     model = _ecoli()
@@ -332,8 +326,6 @@ def _():
 
 @check("expression: reaction_scores + E-Flux bounds on a real model")
 def _():
-    if not Path(ECOLI).exists():
-        raise FileNotFoundError("E. coli core absent")
     model = _ecoli()
     rng = np.random.default_rng(0)
     expr = pd.Series(rng.lognormal(2, 1, len(model.genes)),

@@ -6,7 +6,7 @@
 (b) Lock check: every fold config.json under <out_root>/*fixedcos*/fold*/ is compared with the lock file
     (result/gnn_20261028/protocol_lock_v3_20261030.json): the common keys must match, and (graph, readout, split,
     seed, fold, max_epochs) must belong to one registered arm (grid or dry_test).
-    Control arms (added 2026-10-30, status.md 08:40 KST ruling): an arm may carry "script" (90_gnn_e2e3_v2.py or
+    Control arms (added 2026-10-30, decision log 08:40 KST ruling): an arm may carry "script" (90_gnn_e2e3_v2.py or
     93_mlp_flat_v2.py; configs of those scripts record their script name under --protocol fixed_cosine, 81b configs carry no
     script key), "common_override" (common keys with another value for this arm, e.g. out_root of the MLP runs),
     "common_skip" (common keys the script has no counterpart for) and "flags" (control flags that must match exactly,

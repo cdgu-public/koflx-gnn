@@ -14,7 +14,7 @@ set -u
 R=/data/workspace/cdgu/Winery/seeding/CRC_GEM
 A=${1:?assembly id}; N=${2:-16}; shift; shift || true
 PY58=$R/script_python/58b_moma_line_fixed.py; PY62=$R/script_python/62_line_requirement_caps.py; PY64=$R/script_python/64b_gnn_build_dataset_paths.py
-PYC=/home/cdgu/anaconda3/envs/crcgem/bin/python
+PYC=$HOME/anaconda3/envs/crcgem/bin/python
 grep -q "^${A}	" $R/data/medium/uptake_caps/exchange_lower_bounds_by_assembly.tsv || { echo "unknown assembly $A"; exit 1; }
 O=$R/result/moma_fixed_${A}_20261029; [ -n "${SMOKE_KO:-}" ] && O=${O}_smoke
 if ls $O/ACH-*/meta.json >/dev/null 2>&1 && [ "${RESUME:-0}" != 1 ]; then echo "$O already holds results; set RESUME=1 to skip finished lines"; exit 1; fi

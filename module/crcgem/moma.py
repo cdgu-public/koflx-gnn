@@ -1,6 +1,6 @@
 """MOMA perturbation screens: single deletion and anchored double deletion.
 
-Departures from the BRCA precedent, each deliberate (see documentation/status.md
+Departures from the BRCA precedent, each deliberate (see the project decision log
 "Precedent defects"):
   P1  GPR-aware deletion. BRCA knocked out `gene.reactions` wholesale, discarding
       isozyme redundancy and collapsing complex members to identical values.

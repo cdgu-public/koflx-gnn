@@ -1,4 +1,4 @@
-"""Write the protocol v3 lock that adds the baseline-plus-flag control arm (2026-11-01; user ruling "바로 시작", design
+"""Write the protocol v3 lock that adds the baseline-plus-flag control arm (2026-11-01; user ruling "start now" (translated), design
 result/gnn_20261030_tolpatch/design_flag_arm_20261101.md). New file; result/gnn_20261030_tolpatch/protocol_lock_v3_tolpatch_20261030.json
 is not modified. The new lock = that lock verbatim (common block, grid and the five control arms unchanged, so every existing
 config still matches) plus one arm:
@@ -30,8 +30,8 @@ L["arms"]["control_disabled_flag"] = arm
 L["name"] = "protocol_v3_fixed_budget_cosine_tolpatch_disflag"
 L["written"] = f"{datetime.datetime.now():%Y-%m-%d %H:%M} KST, before the first launch of the baseline-plus-flag arm"
 L["authority"] = [src + " (verbatim: common block, grid, five control arms; unchanged)",
-                  "documentation/status.md entry 2026-10-31 23:55 KST (weakest point: WT-only confounded by the disabled-reaction flag; separating arm = option)",
-                  "user ruling 2026-11-01 ('바로 시작'): run the baseline-plus-flag arm",
+                  "the project decision log entry 2026-10-31 23:55 KST (weakest point: WT-only confounded by the disabled-reaction flag; separating arm = option)",
+                  "user ruling 2026-11-01 ('start now', translated): run the baseline-plus-flag arm",
                   f"{T}/design_flag_arm_20261101.md (design, written before the launch)"]
 L["controls_statement"] += (" Added 2026-11-01: control_disabled_flag (baseline input plus the disabled-reaction flag), out root runs_v2_disflag, "
                             "same split, seeds, folds, tag; the other arms are unchanged and their existing runs match this lock as before.")

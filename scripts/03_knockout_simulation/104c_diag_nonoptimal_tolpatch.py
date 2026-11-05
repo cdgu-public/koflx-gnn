@@ -1,7 +1,7 @@
 """Diagnosis of the 14 trace knockouts whose re-solve under the patch condition (script 104: FeasibilityTol 1e-8, Presolve -1 then 0,
 OptimalityTol 1e-6) was non-optimal and whose shipped row was kept (summary.tsv patch_status kept_shipped_resolve_*), 2026-10-30.
-User question (verbatim): "Optimal이 안 나온건 multiple solution 인지 infeasible인지? Infeasible이면 ungrowth로 보고 ATPM 같은 maintenance
-function들 꺼봐야 할 듯". Diagnostic only: no dataset or patch file is changed.
+User question (translated): "Is the missing optimum due to multiple solutions or to infeasibility? If infeasible, treat it as
+no growth and try switching off maintenance functions such as ATPM." Diagnostic only: no dataset or patch file is changed.
 
 Per knockout (model rebuilt exactly as 104 / 58: repaired tINIT model, assembly lower bounds, per-cell-line caps + script-62 gap-fill,
 reference-fallback biomass bound), with the GPR-disabled reactions closed:

@@ -37,7 +37,7 @@ PROPOSED 2026-10-29 (scheme review, result/gnn_20261028/scheme_review_20261029/s
 - pred_*.tsv gets rel_nn_dist: Chebyshev distance of the sample's fluxome to the nearest training fluxome of the
   same line, divided by the sample's own |v_KO - v_WT|_inf (0 = exact duplicate; evaluation strata).
 
-Changes from v1 (script 73; fix of the graph-B constant-output collapse, diagnosis 2026-10-28 scripts 79 + fable):
+Changes from v1 (script 73; fix of the graph-B constant-output collapse, diagnosis 2026-10-28, script 79 and an independent review):
 - Head and medium branch: ReLU -> LeakyReLU(0.1). With v1 the head input is nearly constant across samples
   (graph B: between-sample std 0.1% of scale at init), the per-unit gradient is batch noise, AdamW random-walks
   each ReLU unit into the absorbing dead state (pre-activation <= 0 for every sample => zero gradient forever);
@@ -53,7 +53,7 @@ Changes from v1 (script 73; fix of the graph-B constant-output collapse, diagnos
 
 Changes from v0 (script 65, kept as run):
 - Splits (all 59 lines; no separate held-out lines, user 2026-10-28):
-  --split gene (primary, vs MOMA): groups = the set of scaffold reactions the knockout disables (546 groups;
+  --split gene (primary, vs MOMA): groups = the set of scaffold reactions the knockout disables (546 groups on the 2026-10-28 dataset, 549 on dataset_v2;
   no union-find merge, which had chained 119 genes / 36% of samples into one group); the 5 largest groups
   one per fold, the rest size-balanced (group_folds; positive rate 0.31-0.53 per fold); validation = random
   groups of the outer-training part (seed = fold; the 4 largest kept in training) up to 20% of samples. --split line (secondary): lines in random order (seed 0) cut into 5 folds; validation = 20% of

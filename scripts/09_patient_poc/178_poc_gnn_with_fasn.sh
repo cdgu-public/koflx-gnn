@@ -1,5 +1,5 @@
 #!/bin/bash
-# Patient POC GNN predictions with the FASN knockout of TCGA-A6-2678-11A re-solved (user 2026-11-04 "확인해서 다시 넣어야").
+# Patient POC GNN predictions with the FASN knockout of TCGA-A6-2678-11A re-solved (user 2026-11-04 "check it and put it back in" (translated)).
 # The 58 MOMA row was 'unbounded'; script 104 --genes re-solved it on the same shipped reference at FeasibilityTol 1e-8
 # (result/patient_poc_20261103_fasn_resolve_20261104), merged by 177 into result/patient_poc_20261103_tolpatch_fasn/moma.
 # Then the branch T steps of 145 unchanged: 64d (same line map, overrides, scaffold) -> 99 on the 6 model runs -> 146.
@@ -7,7 +7,7 @@
 # Usage: GPU=2 nohup bash script_bash/178_poc_gnn_with_fasn.sh > result/patient_poc_20261103/178_chain.log 2>&1 &
 R=/data/workspace/cdgu/Winery/seeding/CRC_GEM; cd $R
 P=result/patient_poc_20261103; GPU=${GPU:-2}
-PY=/home/cdgu/anaconda3/envs/crcgem/bin/python; PYG=/home/cdgu/anaconda3/envs/crcgem_gnn/bin/python; export PYTHONNOUSERSITE=1
+PY=$HOME/anaconda3/envs/crcgem/bin/python; PYG=$HOME/anaconda3/envs/crcgem_gnn/bin/python; export PYTHONNOUSERSITE=1
 LINEMAP=data/tcga_xena_20261103/processed_pcU_20261103/lines.tsv
 LINES=$(tail -n +2 $LINEMAP | cut -f1)
 say() { echo "[$(date '+%F %T')] $*"; }

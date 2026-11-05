@@ -1,5 +1,5 @@
 """Write the protocol v3 lock for the GNN on one common-medium dataset (2026-10-31; design
-result/common_medium_20261030/gnn_design_20261031.md section 2 (4); user ruling status.md 2026-10-31 17:57 entry, item 4).
+result/common_medium_20261030/gnn_design_20261031.md section 2 (4); user ruling decision log 2026-10-31 17:57 entry, item 4).
 Copy of result/gnn_20261030_tolpatch/protocol_lock_v3_tolpatch_20261030.json with common.dataset / out_root / tag of the medium,
 the dataset md5, grid arm only (graph A' only unless --with-b), control arms removed, runner 116 added to the allowed readers.
 Refuses to overwrite an existing lock. Usage: 117_make_lock_common_medium.py <DMEMF12_Gibco11320|RPMI1640_Gibco11875> [--with-b]
@@ -18,7 +18,7 @@ L = json.load(open(src))
 md5 = hashlib.md5(open(f"{DS}/samples.tsv", "rb").read()).hexdigest()
 L["name"] = f"protocol_v3_fixed_budget_cosine_common_{M}"
 L["written"] = f"{datetime.datetime.now():%Y-%m-%d %H:%M} KST, before the first launch on the common-medium dataset {M}"
-L["authority"] = [src + " (training rule unchanged)", "documentation/status.md entry 2026-10-31 17:57 KST (user: GNN on both common-medium datasets, RUN)",
+L["authority"] = [src + " (training rule unchanged)", "the project decision log entry 2026-10-31 17:57 KST (user: GNN on both common-medium datasets, RUN)",
                   "result/common_medium_20261030/gnn_design_20261031.md (design)"]
 L["statement"] = (f"Same training rule as {os.path.basename(src)}, applied to {DS} (MOMA under a common medium, {M}; script 64d). "
                   "Gene-disjoint folds are the default group_folds of 81b on this dataset (not pinned to the own-medium folds; design section 1); "

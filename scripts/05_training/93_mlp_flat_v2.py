@@ -1,6 +1,6 @@
 """Arms 1 / 1b: MLP on exactly the flat HGB input of script 86 (slog(v_KO - v_WT) of the 7,147 unmasked active-anywhere
 reactions + the medium columns that vary across training lines, z-scored on them), same samples and splits as 81/86.
-User-approved 2026-10-29 (status.md 13:40 entry; review_gnn_gap.md section 3). 81/81b/85/86 untouched; data code copied from 86.
+User-approved 2026-10-29 (decision log 13:40 entry; review_gnn_gap.md section 3). 81/81b/85/86 untouched; data code copied from 86.
 
 --recipe gnn81 (Arm 1): the training recipe of script 81. Soft target (clipped dependency) with BCEWithLogits, balanced
     WeightedRandomSampler on the binary label with replacement (n_train draws per epoch), AdamW lr 1e-3 wd 1e-4, batch 32,

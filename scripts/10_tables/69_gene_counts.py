@@ -16,7 +16,7 @@ Stages (gene level; per line where the stage is line-specific):
 Per stage: genes (or line-gene pairs), DepMap-lethal among them; per line median (min-max); genes lethal in
 >= 1 line and in all 59 lines. The lethal share of all DepMap-lethal genes of the line (G0) is also given.
 Env: crcgem (cobra). Output: <out>/{t1_stages.tsv, t2_per_line.tsv, summary.txt}
-CLI (added 2026-11-01, user ruling "Table 1 다시"; defaults reproduce the 2026-10-28 run):
+CLI (added 2026-11-01, user ruling "redo Table 1" (translated); defaults reproduce the 2026-10-28 run):
   --dataset  GNN dataset dir with samples.tsv and lines/*.npz   (default result/gnn_20261028/dataset;
              tolerance patch: result/gnn_20261030_tolpatch/dataset_v2)
   --moma-root MOMA root with <line>/meta.json (gap-fill lists)   (default result/moma_20261027)

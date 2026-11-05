@@ -1,5 +1,5 @@
 """Write the protocol v3 lock that adds the graph B medium-input entry on dataset_v2 (2026-11-03; user approval 2026-11-03 ~16:30
-"GPU 실행안 승인. medium input부터": GPU 2 only, seed 0, folds 0-4). New file; protocol_lock_v3_tolpatch_medinput_20261102.json
+"GPU run plan approved; medium input first" (translated): GPU 2 only, seed 0, folds 0-4). New file; protocol_lock_v3_tolpatch_medinput_20261102.json
 is not modified. The new lock = that lock verbatim (common block and all entries unchanged, so every existing config still matches)
 plus one entry:
   medium_input_B  script 81b_gnn_train_v2.py without --no-medium, graph B (mean_max), gene-disjoint split, seed 0, folds 0-4,

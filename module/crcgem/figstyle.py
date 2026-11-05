@@ -3,8 +3,7 @@
 Palette origin (user request 2026-11-02): seeded from quantum_gem/script_python/update_suppl_figures.py:16 PALETTE
 ['#2E86C1','#E74C3C','#27AE60','#F39C12','#8E44AD','#16A085'] and its COND_COLOR rows. Greens (#27AE60, #16A085) dropped
 (no green hues); #E74C3C / #F39C12 darkened to #C0392B / #D35400 (the same file's COND_COLOR values) for contrast on white;
-gold #B7950B and pink #E84393 added as slots 4-5. No liver / HCC project directory exists under /data/workspace/cdgu or
-/home/cdgu (searched 2026-11-02), so quantum_gem is the only earlier-project palette referenced.
+gold #B7950B and pink #E84393 added as slots 4-5.
 Colorblind check (dataviz validate_palette.js, light surface, 2026-11-02): slots 1-6 adjacent pairs PASS (worst CVD dE 13.6,
 normal dE 15.6); slots 1-5 all-pairs PASS normal vision (worst 15.4), CVD worst 6.6 (deutan, blue vs purple) = warn band, so
 every multi-series scatter also encodes the series by marker symbol. Red (slot 6) is never drawn next to orange in one plot.
@@ -66,8 +65,8 @@ CONTROL_LABEL = {  # 85/118 variant tokens -> terminology.md terms
     "nomed_fixedcos30_tolpatch": "GNN, Mass Flow Graph (MFG)",
     "nomed_meanmax_fixedcos30_tolpatch": "GNN, bipartite metabolite-reaction graph (BMRG)",
     "nomed_shufrelabel_fixedcos30_tolpatch": "node-feature<br>shuffling control",
-    "nomed_mlp81_fixedcos30_tolpatch": "multilayer perceptron baseline<br>(GNN training recipe)",  # PROVISIONAL label, user to ratify (open_questions 29)
-    "nomed_mlphgb_fixedcos30_tolpatch": "multilayer perceptron baseline<br>(gradient-boosting-like<br>training recipe)",  # PROVISIONAL label, user to ratify (open_questions 29)
+    "nomed_mlp81_fixedcos30_tolpatch": "multilayer perceptron baseline<br>(soft targets)",  # user accepted Q29 2026-11-03 (project decision log)
+    "nomed_mlphgb_fixedcos30_tolpatch": "multilayer perceptron baseline<br>(hard labels)",  # user accepted Q29 2026-11-03 (project decision log)
     "nomed_rid16_fixedcos30_tolpatch": "reaction identity<br>embedding",
     "nomed_wtonly_fixedcos30_tolpatch": "WT-only input",
     "nomed_disflag_fixedcos30_tolpatch": "baseline input plus a column<br>marking the reactions disabled<br>by the knockout",

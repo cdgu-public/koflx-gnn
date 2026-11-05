@@ -1,5 +1,5 @@
-"""Write the protocol v3 lock that adds the medium-input arm on dataset_v2 (2026-11-02; user ruling 2026-11-02 "배지 입력 GNN 재실행
-후순위로 실행": runs after the main-flow items, on idle GPUs). New file; protocol_lock_v3_tolpatch_disflag_20261101.json is not modified.
+"""Write the protocol v3 lock that adds the medium-input arm on dataset_v2 (2026-11-02; user ruling 2026-11-02 "rerun the medium-input GNN
+at low priority" (translated): runs after the main-flow items, on idle GPUs). New file; protocol_lock_v3_tolpatch_disflag_20261101.json is not modified.
 The new lock = that lock verbatim (common block and all arms unchanged, so every existing config still matches) plus one arm:
   medium_input  script 81b_gnn_train_v2.py without --no-medium, graph A' (attn_max), gene-disjoint split, seeds 0-2, folds 0-4,
                 30 epochs, common_override no_medium false and out_root result/gnn_20261030_tolpatch/runs_v2_med.

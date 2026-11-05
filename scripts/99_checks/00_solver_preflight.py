@@ -16,7 +16,7 @@ import sys
 import time
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "module"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "module"))  # repo root/module; resolve() follows the script_python/ link
 
 from crcgem import solver as solver_mod  # noqa: E402
 

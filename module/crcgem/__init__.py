@@ -14,7 +14,7 @@ Layout
     sampling      OptGP with convergence gating and variance decomposition
     distribution  real-vs-generated identity testing on flux distributions
 
-Design state lives in documentation/status.md. Several decisions are still open;
+Design state lives in the project decision log. Several decisions are still open;
 this package is written so that an unresolved decision fails loudly at config
 validation rather than being silently defaulted.
 """

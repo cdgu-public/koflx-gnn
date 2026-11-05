@@ -7,5 +7,5 @@
 R=/data/workspace/cdgu/Winery/seeding/CRC_GEM
 O=$R/result/tinit_localT2_20261027
 export PYTHONNOUSERSITE=1
-xargs -P "${1:-22}" -I{} bash -c 'd='"$O"'/models/{}; [ -s $d/{}.xml ] && exit 0; mkdir -p $d; cd $d; printf "Threads 2\n" > gurobi.env; /home/cdgu/anaconda3/envs/crcgem_extraction/bin/python '"$R"'/script_python/22_tinit_localT2.py --expression '"$R"'/data/depmap/crc_trainset/crc_expression.ENSG.parquet --scaffold '"$R"'/data/scaffold/Human-GEM.xml --solver gurobi --lines {} --out $d > $d/run.log 2>&1' < "$O/lines.txt"
+xargs -P "${1:-22}" -I{} bash -c 'd='"$O"'/models/{}; [ -s $d/{}.xml ] && exit 0; mkdir -p $d; cd $d; printf "Threads 2\n" > gurobi.env; $HOME/anaconda3/envs/crcgem_extraction/bin/python '"$R"'/script_python/22_tinit_localT2.py --expression '"$R"'/data/depmap/crc_trainset/crc_expression.ENSG.parquet --scaffold '"$R"'/data/scaffold/Human-GEM.xml --solver gurobi --lines {} --out $d > $d/run.log 2>&1' < "$O/lines.txt"
 echo "ALL DONE $(date); models: $(ls $O/models/*/*.xml 2>/dev/null | wc -l)"

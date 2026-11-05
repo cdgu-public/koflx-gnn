@@ -4,7 +4,7 @@ Model: result/tinit_localT2_20261027/models/<line>/<line>.repaired.xml (scripts 
 Medium: the line's assembly (data/medium/line_medium_map.tsv) with exchange lower bounds from
 data/medium/uptake_caps/exchange_lower_bounds_by_assembly.tsv (script 57); exchanges not listed
 are closed for uptake; upper bounds unchanged.
-Reference: pFBA at the FBA optimum (config crc_depmap_celllines.yaml: proliferative_reference pfba).
+Reference: pFBA at the FBA optimum.
 Screen: quadratic MOMA (cobra add_moma built once; see comment in the body; GPR-aware deletion) over every gene whose
 knockout disables >= 1 reaction of the context model. Full flux matrix kept.
 Usage: python 58_moma_line.py <ModelID> [--threads 2]   Env: crcgem.

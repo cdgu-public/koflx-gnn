@@ -1,5 +1,5 @@
 """Pooled out-of-fold AUROC on the samples shared with the own-medium dataset: each common-medium GNN grid against the own-medium GNN grid
-(design result/common_medium_20261030/gnn_design_20261031.md section 2 items (2) and (3b), falsifiers section 3; user approval status.md 2026-11-03 ruling (3)).
+(design result/common_medium_20261030/gnn_design_20261031.md section 2 items (2) and (3b), falsifiers section 3; user approval decision log 2026-11-03 ruling (3)).
 
 Sample set per common medium M: raw/intersection_samples.tsv of script 111 (own-medium dataset_v2 GNN samples intersected with the common-medium
 dataset GNN samples, 81b fluxome-change filter): DMEM/F-12 17,708, RPMI-1640 18,427. Own-only and common-only samples: counts only, no metric.
@@ -274,7 +274,7 @@ counts = ov111[["own_gnn_samples", "common_gnn_samples", "intersection", "own_on
 
 # ---------------- write ----------------
 os.makedirs(f"{OUT}/raw")
-HDR = (f"# script_python/139_oof_intersection_common_vs_own.py; design result/common_medium_20261030/gnn_design_20261031.md section 2 (2), (3b), section 3; user approval status.md 2026-11-03 ruling (3); date {time.strftime('%Y-%m-%d %H:%M %Z')}\n"
+HDR = (f"# script_python/139_oof_intersection_common_vs_own.py; design result/common_medium_20261030/gnn_design_20261031.md section 2 (2), (3b), section 3; user approval decision log 2026-11-03 ruling (3); date {time.strftime('%Y-%m-%d %H:%M %Z')}\n"
        f"# pooled out-of-fold AUROC on the samples shared with the own-medium dataset (one AUROC over the pooled out-of-fold predictions; this is NOT the fold-mean AUROC of script 85 / comparison_grid)\n"
        f"# shared samples: {CM}/raw/intersection_samples.tsv (script 111; own {OWN}/dataset_v2 GNN samples x common-medium dataset GNN samples, 81b fluxome-change filter); own-only and common-only samples: counts only, no metric\n"
        f"# GNN runs: own {OWN}/runs_v2 (*_tolpatch), common result/gnn_fixed_<medium>_20261030_tolpatch/runs_v2 (*_cm<medium>); graphs A′ (A_*_nomed_fixedcos30, attn_max) and B (B_*_nomed_meanmax_fixedcos30, mean_max); protocol v3 fixed 30 epochs cosine, no medium input; seeds 0-2 averaged per sample (seed mean of gnn_prob), folds 0-4\n"

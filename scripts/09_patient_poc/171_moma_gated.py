@@ -1,6 +1,6 @@
 """Patient POC quadratic MOMA re-solve with invariant gates G0-G2 (2026-11-04).
 Task: coordinator brief 2026-11-04 (user rulings: all POC QPs at Gurobi FeasibilityTol 1e-9 on both sides, float64 storage).
-Fixes vs 142 (verify_poc_fable_20261104.md R1, R2):
+Fixes vs 142 (internal review 2026-11-04, items R1 and R2):
   (a) tumor reference = pFBA recomputed here at FeasibilityTol 1e-9, crcgem reference_flux.compute(model, 'pfba') as 58:96
       (diagnose=False: the face FVA of 58 only records degenerate reactions and does not enter the flux; 58's own retry uses the same).
       No fallback: if the pFBA is infeasible or not optimal, it is recorded in gates_ref and the tumor is stopped.

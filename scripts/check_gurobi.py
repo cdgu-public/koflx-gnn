@@ -1,6 +1,6 @@
 """Check that gurobipy is importable, report its version and license type, and solve a tiny LP and a tiny QP.
 
-The context-specific models have up to about 13,000 reactions (Human-GEM scaffold 12,931). The size-limited license that
+The Human-GEM scaffold has 12,931 reactions and the context-specific models 7,227 to 9,887. The size-limited license that
 ships with the pip/conda gurobipy package allows at most 2,000 variables and 2,000 linear constraints, so the pipeline
 needs a full license (for academic users, the free Gurobi academic license).
 

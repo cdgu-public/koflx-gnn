@@ -1,5 +1,5 @@
 """E2 / E3 controls on GNN v2 (script 81 derived, 2026-10-29; 81, 81b, 85, 86 untouched). review_gem.md section 8.5,
-user-approved 2026-10-29 13:40 (status.md). Identical to 81 unless one of the flags below is set.
+user-approved 2026-10-29 13:40 (decision log). Identical to 81 unless one of the flags below is set.
 
 E3  --shuffle-graph relabel|rewire   (A' only) graph-shuffled control, fixed per sample (rng seed 1000*seed + sample idx,
     so the same shuffled graph is used in every epoch and at test). relabel: node permutation applied to edge_index only,
@@ -19,7 +19,7 @@ WT-only --wt-only                    (A' only) the same predictor given only the
     network are unchanged. The disabled-reaction flag is the only knockout information (without it every knockout of a cell
     line would get the same prediction); it is the knocked-out-reaction flag that the 2026-10-27 ruling removed from A' when
     v_KO carried the perturbation. Token _wtonly.
-Disabled flag --disabled-flag        (A' only, 2026-11-01, user ruling "바로 시작"; design result/gnn_20261030_tolpatch/design_flag_arm_20261101.md)
+Disabled flag --disabled-flag        (A' only, 2026-11-01, user ruling "start now" (translated); design result/gnn_20261030_tolpatch/design_flag_arm_20261101.md)
     the baseline A' input plus ONE extra node-feature column: the disabled-reaction flag of the WT-only arm (1 on the knockout's
     disabled reactions, scaffold_meta gene_rxns, growth mask applied). Node set (WT-active or KO-active), edges, edge attributes,
     the KO flux columns and the currency columns are the baseline's; F_IN grows by 1 (input layer +64 parameters), nothing else
@@ -59,7 +59,7 @@ PROPOSED 2026-10-29 (scheme review, result/gnn_20261028/scheme_review_20261029/s
 - pred_*.tsv gets rel_nn_dist: Chebyshev distance of the sample's fluxome to the nearest training fluxome of the
   same line, divided by the sample's own |v_KO - v_WT|_inf (0 = exact duplicate; evaluation strata).
 
-Changes from v1 (script 73; fix of the graph-B constant-output collapse, diagnosis 2026-10-28 scripts 79 + fable):
+Changes from v1 (script 73; fix of the graph-B constant-output collapse, diagnosis 2026-10-28, script 79 and an independent review):
 - Head and medium branch: ReLU -> LeakyReLU(0.1). With v1 the head input is nearly constant across samples
   (graph B: between-sample std 0.1% of scale at init), the per-unit gradient is batch noise, AdamW random-walks
   each ReLU unit into the absorbing dead state (pre-activation <= 0 for every sample => zero gradient forever);
@@ -75,7 +75,7 @@ Changes from v1 (script 73; fix of the graph-B constant-output collapse, diagnos
 
 Changes from v0 (script 65, kept as run):
 - Splits (all 59 lines; no separate held-out lines, user 2026-10-28):
-  --split gene (primary, vs MOMA): groups = the set of scaffold reactions the knockout disables (546 groups;
+  --split gene (primary, vs MOMA): groups = the set of scaffold reactions the knockout disables (546 groups on the 2026-10-28 dataset, 549 on dataset_v2;
   no union-find merge, which had chained 119 genes / 36% of samples into one group); the 5 largest groups
   one per fold, the rest size-balanced (group_folds; positive rate 0.31-0.53 per fold); validation = random
   groups of the outer-training part (seed = fold; the 4 largest kept in training) up to 20% of samples. --split line (secondary): lines in random order (seed 0) cut into 5 folds; validation = 20% of

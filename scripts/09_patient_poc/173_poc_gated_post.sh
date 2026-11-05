@@ -5,7 +5,7 @@
 #          $P/distance/poc_percentile_gated_20261104$1.tsv. Nothing existing is overwritten (173/141 refuse or suffix).
 R=/data/workspace/cdgu/Winery/seeding/CRC_GEM; cd $R
 P=result/patient_poc_20261103; O=$P/moma_gated_20261104; D=$P/distance; SFX=$1
-PY=/home/cdgu/anaconda3/envs/crcgem/bin/python; export PYTHONNOUSERSITE=1 CUDA_VISIBLE_DEVICES=
+PY=$HOME/anaconda3/envs/crcgem/bin/python; export PYTHONNOUSERSITE=1 CUDA_VISIBLE_DEVICES=
 say() { echo "[$(date '+%F %T')] $*"; }
 nice -n 10 $PY script_python/172_check_moma_gated.py $O --tag "$SFX" > $O/172$SFX.log 2>&1 || { say "172 FAILED"; exit 1; }; say "172 ok"
 for s in tumor normal; do

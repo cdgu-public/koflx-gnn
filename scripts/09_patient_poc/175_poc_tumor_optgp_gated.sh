@@ -1,5 +1,5 @@
 #!/bin/bash
-# Patient POC: tumor models with OptGP references (user 2026-11-04 ~11:4x "환자 Cancer 도 OptGP로 돌려서 데이터 같이 보여줘").
+# Patient POC: tumor models with OptGP references (user 2026-11-04 ~11:4x "run the patient tumor models with OptGP too and show the data together" (translated)).
 # Only factor changed vs the normal side of 160 + 172 + 173: the model (TCGA-A6-{2671,2675,2678}-01A instead of -11A).
 # Same assembly RPMI1640_Gibco11875, caps, 110 args (processes 4, thinning 100, n 100, seeds 0 1, threads 2, float64),
 # same 18-gene list, 171 on seed-0 samples in ranges of 2 (FeasibilityTol 1e-9, both checks at their defaults), 141 --tol 1e-7.
@@ -11,7 +11,7 @@
 # Usage: nohup bash script_bash/175_poc_tumor_optgp_gated.sh > result/patient_poc_20261103/tumor_optgp_gated_20261104/chain.log 2>&1 &
 R=/data/workspace/cdgu/Winery/seeding/CRC_GEM; cd $R
 export P=result/patient_poc_20261103; export O=$P/tumor_optgp_gated_20261104; D=$P/distance
-export PY=/home/cdgu/anaconda3/envs/crcgem/bin/python PYTHONNOUSERSITE=1 CUDA_VISIBLE_DEVICES= A=RPMI1640_Gibco11875
+export PY=$HOME/anaconda3/envs/crcgem/bin/python PYTHONNOUSERSITE=1 CUDA_VISIBLE_DEVICES= A=RPMI1640_Gibco11875
 export G=$P/genes/poc_genes_cut10.txt
 TUM="TCGA-A6-2671-01A TCGA-A6-2675-01A TCGA-A6-2678-01A"
 say() { echo "[$(date '+%F %T')] $*"; }

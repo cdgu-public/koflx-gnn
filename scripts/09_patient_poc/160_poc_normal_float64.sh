@@ -1,5 +1,5 @@
 #!/bin/bash
-# Patient POC normals rerun with float64 storage (user 2026-11-03 ~18:40 "다시 돌리고"; cause = verify_poc_distance_20261103.md item 1).
+# Patient POC normals rerun with float64 storage (user 2026-11-03 ~18:40 "rerun" (translated); cause = verify_poc_distance_20261103.md item 1).
 # Only factor vs the 152 run: storage dtype of the OptGP samples (110 --sample-dtype float64) and of the 142 knockout fluxes
 # (--flux-dtype float64). Same models, assembly, caps, seeds 0 1, thinning 100, n 100, gene list, sample ranges. New output roots.
 #   (1) 110 per normal (3 in parallel, 4 processes each) -> $P/optgp_f64/<n>
@@ -9,7 +9,7 @@
 # Usage: P=result/patient_poc_20261103 nohup nice -n 10 bash script_bash/160_poc_normal_float64.sh > result/patient_poc_20261103/160_chain.log 2>&1 &
 R=/data/workspace/cdgu/Winery/seeding/CRC_GEM; cd $R
 : ${P:?}
-PY=/home/cdgu/anaconda3/envs/crcgem/bin/python; export PYTHONNOUSERSITE=1; A=RPMI1640_Gibco11875
+PY=$HOME/anaconda3/envs/crcgem/bin/python; export PYTHONNOUSERSITE=1; A=RPMI1640_Gibco11875
 say() { echo "[$(date '+%F %T')] $*"; }
 die() { say "FAILED: $*"; echo "$(date '+%F %T') 160 $*" >> $P/chain_failed.txt; exit 1; }
 NOR="TCGA-A6-2671-11A TCGA-A6-2675-11A TCGA-A6-2678-11A"; G=$P/genes/poc_genes_cut10.txt; D=$P/distance

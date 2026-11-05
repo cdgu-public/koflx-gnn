@@ -38,7 +38,7 @@ job() { g=$1 gr=$2 sp=$3 s=$4 f=$5 E=$6
 case $STAGE in
   dry)
     t=B_gene_nomed_meanmax_fixedcos2_s0${TAG}_dry_fold3
-    CUDA_VISIBLE_DEVICES=0 nice -n $NICE $PYG script_python/81b_gnn_train_v2.py --graph B --split gene --seed 0 --fold 3 --no-medium --readout mean_max \
+    mkdir -p $T/_dry_smoke; CUDA_VISIBLE_DEVICES=0 nice -n $NICE $PYG script_python/81b_gnn_train_v2.py --graph B --split gene --seed 0 --fold 3 --no-medium --readout mean_max \
         --max-epochs 2 --min-epochs 1 --max-train-batches 150 --protocol fixed_cosine --protocol-lock none --dataset $DS --out-root $T/_dry_smoke --tag ${TAG}_dry --workers $W \
         > $T/_dry_smoke/train_$t.log 2>&1 && echo "dry OK $t $(date)" || echo "DRY FAILED $t $(date)"
     grep -E "samples|graph B fixed|epoch_s|done" $T/_dry_smoke/train_$t.log | cut -c1-300;;

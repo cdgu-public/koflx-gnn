@@ -1,4 +1,4 @@
-"""External validation set: how much of the GNN ranking is the colorectal per-gene base rate (2026-11-03; user "spearman은 그냥 돌리면").
+"""External validation set: how much of the GNN ranking is the colorectal per-gene base rate (2026-11-03; user "just run Spearman" (translated)).
 Moved into the project from the verifier's scratch script (verify_external_20261101.md:110-112, gnn_vs_baserate.py); arithmetic unchanged.
 Per graph (A', B) and labelled cell line: GNN = mean probability over the 15 cell-line-disjoint models (pred_v3/<graph>_line_*/fold*/
 pred_external.tsv); base rate = mean dependency of the gene over the 59 colorectal cell lines (dataset_v2 samples.tsv; absent genes get

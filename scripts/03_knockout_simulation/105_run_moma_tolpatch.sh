@@ -10,7 +10,7 @@
 # Launch: nohup bash script_bash/105_run_moma_tolpatch.sh all 8 > result/moma_20261030_tolpatch.launch.log 2>&1 &
 R=/data/workspace/cdgu/Winery/seeding/CRC_GEM; cd $R
 export PYTHONNOUSERSITE=1 R
-P=/home/cdgu/anaconda3/envs/crcgem/bin/python; export P
+P=$HOME/anaconda3/envs/crcgem/bin/python; export P
 SET=${1:-all}; N=${2:-8}; T=${THREADS:-2}; export T
 # Solver conditions of the re-solves (measured 2026-10-30 13:30-13:45, ACH-000651): the production path is FeasibilityTol 1e-7,
 # OptimalityTol 1e-7, Presolve 0, Method 0 (cobra 0.29.1 / optlang defaults, NOT Gurobi's 1e-6 / Presolve -1); at FeasibilityTol 1e-8

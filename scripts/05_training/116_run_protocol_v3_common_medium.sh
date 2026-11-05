@@ -1,6 +1,6 @@
 #!/bin/bash
 # Protocol v3 grid (graph A' only) on the two common-medium datasets (MOMA under a common medium; user ruling 2026-10-31,
-# status.md 17:57 entry item 4; design result/common_medium_20261030/gnn_design_20261031.md). Copy of 107 with the dataset,
+# decision log 17:57 entry item 4; design result/common_medium_20261030/gnn_design_20261031.md). Copy of 107 with the dataset,
 # lock, out root and folder tag of each medium; training rule unchanged (81b --protocol fixed_cosine, 30 epochs, --no-medium).
 #   T     result/gnn_fixed_<M>_20261030_tolpatch, dataset $T/dataset, lock $T/protocol_lock_v3_common_<M>_20261031.json
 #   runs  $T/runs_v2/A_<split>_nomed_fixedcos30_s<seed>_cm<M>/fold<k>     (M = DMEMF12_Gibco11320 | RPMI1640_Gibco11875)

@@ -7,7 +7,7 @@ TaskEvaluator for metabolic tasks.
 
 TO VERIFY at first use: whether TROPPO's `(t)INIT` module is INIT or tINIT, and
 whether ftINIT (Gustafsson et al. 2023) is covered. Recorded as open in
-documentation/status.md; do not assert in a manuscript until checked in code.
+the project decision log; do not assert in a manuscript until checked in code.
 
 MILP requirement is hard. Measured on this workstation (2026-07-21):
 GLPK solved 200 binaries in 0.4 s but failed at 800 and 3,991 (>600 s);
